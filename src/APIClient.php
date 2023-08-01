@@ -32,7 +32,8 @@ class APIClient
         $this->guzzleClient = new GuzzleClient([
             'base_uri' => self::BASE_URL,
             'headers' => [
-                'Authorization' => $authHeader
+                'Authorization' => $authHeader, 
+                'Smartsheet-Change-Agent' => 'Laravel'
             ]
         ]);
     }
