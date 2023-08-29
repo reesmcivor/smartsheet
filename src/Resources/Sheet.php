@@ -193,6 +193,14 @@ class Sheet extends Resource
         );
     }
 
+    public function createRowToTop(array $cells): object
+    {
+        return $this->insertRows([
+            'toTop' => true,
+            'cells' => $this->generateRowCells($cells)
+        ]);
+    }
+
     /**
      * @param array $rows
      * @throws Exception
@@ -356,7 +364,7 @@ class Sheet extends Resource
                 'formula' => $formula
             ]
         ];
-        return $this->client->post("sheets/$this->id/summary/fields", 
+        return $this->client->post("sheets/$this->id/summary/fields",
             ['json' => [...$options]]
         );
     }
@@ -365,7 +373,7 @@ class Sheet extends Resource
     {
         $summaryField = $this->getSummaryFieldByName($fieldName);
         $summaryFieldDefinition['id'] = $summaryField->id;
-        
+
         return $this->updateSummaryField($summaryFieldDefinition);
     }
 
@@ -376,7 +384,7 @@ class Sheet extends Resource
 
     public function updateSummaryFields(array $summaryFields)
     {
-        return $this->client->put("sheets/$this->id/summary/fields", 
+        return $this->client->put("sheets/$this->id/summary/fields",
             ['json' => [...$summaryFields]]
         );
     }
